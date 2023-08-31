@@ -1,0 +1,49 @@
+p{
+    display: inline;
+
+}
+div{
+    margin-bottom: 10px;
+}
+table{
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+td, th {
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+  }
+th{
+    background-color: lightgray;
+}
+.even{
+    background-color: lightblue;
+    color:rgb(0, 0, 0);
+}
+.odd{
+    background-color: lightgreen;
+    color:rgb(0, 0, 0);
+}
+h1{
+    text-align: center;
+}
+td{
+    text-align: center;
+    
+}
+td button {  
+    margin:10px 0 10px;
+    background-color: rgb(26, 208, 232);
+    border: 0; 
+    border-radius: 20px;
+}
+
+td button:hover{
+    background-color: rgba(86, 255, 8, 0.67);
+    cursor: pointer;
+    
+}
+  
+
+       
