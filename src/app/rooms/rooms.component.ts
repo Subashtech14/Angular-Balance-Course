@@ -22,8 +22,12 @@ constructor(@SkipSelf() private roomsService : RoomsService){
 
 }
 ngOnInit(): void {
+  this.roomsService.getRooms().subscribe((rooms)=>{
+    console.log(rooms);
+    this.roomList=rooms;
+  })
  //console.log(this.headerComponent);
- this.roomList=this.roomsService.getRooms();
+ 
 }
  ngAfterViewChecked(): void {
    //this.headerComponent.title='Rooms View';
@@ -32,7 +36,7 @@ ngOnInit(): void {
  //console.log(this.headerComponent); 
  //If you do this you will get ngOnChanges occured twice error because of development mode angular will run twice ngoncheck in development mode
  //this.headerComponent.title='Rooms View';
- this.headerChildrenComponent.last.title="Last Title";
+//  this.headerChildrenComponent.last.title="Last Title";
  
  console.log(this.headerChildrenComponent);
  
@@ -67,7 +71,7 @@ ngOnInit(): void {
  }
  addRoom(){
    const room: RoomList = {
-     roomNumber: 104,
+     roomNumber: "104",
      roomType: 'Deluxe',
      amenities: 'TV, AC, Wifi',
      price: 100,
