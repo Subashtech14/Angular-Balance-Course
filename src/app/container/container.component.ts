@@ -13,7 +13,8 @@ import { RoomsService } from '../rooms/services/rooms.service';
 export class ContainerComponent implements OnInit,AfterContentInit,OnDestroy{
 @ContentChild(EmployeeComponent) employee !:EmployeeComponent;
 constructor(@Host() private roomsService:RoomsService){
-
+console.log(
+roomsService.getRooms());
 }
 ngDoCheck(): void {
   console.log('ngDoCheck');
