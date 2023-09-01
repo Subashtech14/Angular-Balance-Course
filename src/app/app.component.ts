@@ -1,8 +1,8 @@
 
-import { AfterViewInit, Component, ElementRef, OnInit, Optional, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Inject, OnInit, Optional, ViewChild, ViewContainerRef } from '@angular/core';
 import { RoomsComponent } from './rooms/rooms.component';
 import { LoggerService } from './logger.service';
-
+import { localStorageToken } from './localstorage.token';
 @Component({
   selector: 'hinv-root',
   templateUrl: './app.component.html',
@@ -14,12 +14,13 @@ export class AppComponent implements OnInit {
 
    
 
-  constructor(@Optional() private loggerService:LoggerService,){
-
+  constructor(@Optional() private loggerService:LoggerService,
+  @Inject(localStorageToken) private localStorage:Storage){
   }
   ngOnInit(): void {
     this.loggerService?.log('AppComponent.ngOnInit()');
     this.name.nativeElement.innerText='Hilton Hotel';
+    this.localStorage.setItem('name','Subash');
   }
   title = 'hotelinventoryapp';
   role = 'admin';
