@@ -8,13 +8,16 @@ import { RoomsService } from '../rooms/services/rooms.service';
   selector: 'hinv-container',
   templateUrl: './container.component.html',
   styleUrls: ['./container.component.scss'],
-  providers:[RoomsService]
+  //providers:[RoomsService]
 })
 export class ContainerComponent implements OnInit,AfterContentInit,OnDestroy{
 @ContentChild(EmployeeComponent) employee !:EmployeeComponent;
-constructor(@Host() private roomsService:RoomsService){
-console.log(
-roomsService.getRooms());
+// constructor(@Host() private roomsService:RoomsService){
+// console.log(
+// roomsService.getRooms());
+// }
+constructor(){
+  
 }
 ngDoCheck(): void {
   console.log('ngDoCheck');

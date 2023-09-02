@@ -5,7 +5,7 @@ import { Room } from './rooms';
 import { RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 @Component({
  selector: 'hinv-rooms',
@@ -32,6 +32,7 @@ stream = new Observable<string>(observer =>{
   observer.error('Error Occured');
 });
 totalBytes = 0;
+subscription!:Subscription;
 ngOnInit(): void {
   this.stream.subscribe({
     next:(data)=>{console.log(data);},
@@ -39,10 +40,7 @@ ngOnInit(): void {
     error:(err)=>{console.log(err);}
   });
   this.stream.subscribe((data)=>{console.log(data);})
-  this.roomsService.getRooms().subscribe((rooms)=>{
-    console.log(rooms);
-    this.roomList=rooms;
-  })
+
   this.roomsService.getPhotos().subscribe((event)=>{
     switch(event.type){
       case HttpEventType.Sent:{
@@ -59,11 +57,13 @@ ngOnInit(): void {
         break;
       }
       case HttpEventType.Response:{
-        console.log("Response received... "+event.body);
+        // console.log("Response received... "+event.body);
         break;
       }
     }
-
+    this.roomsService.getRooms$.subscribe((data)=>{
+      this.roomList=data;
+    })
     
   })
  //console.log(this.headerComponent);
@@ -145,9 +145,12 @@ ngOnInit(): void {
   })
 }
 deleteRoom(){
-  this.roomsService.delete('3').subscribe((data)=>{
+  this.subscription=this.roomsService.delete('3').subscribe((data)=>{
     console.log(data);
   this.roomList=data;
   })
+}
+ngOnDestroy(){
+  this.subscription.unsubscribe();
 }
 }

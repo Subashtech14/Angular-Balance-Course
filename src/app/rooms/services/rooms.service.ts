@@ -3,6 +3,7 @@ import { Room, RoomList } from '../rooms';
 import { APP_SERVICE_CONFIG } from 'src/app/AppConfig/appconfig.services';
 import { AppConfig } from 'src/app/AppConfig/appconfig.interface';
 import { HttpClient, HttpRequest } from '@angular/common/http';
+import { shareReplay } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -42,7 +43,9 @@ export class RoomsService {
     console.log(this.config.apiEndpoint);
     console.log('Rooms Service Initialized...');
   }
-
+getRooms$ = this.http.get<RoomList[]>('api/Rooms/').pipe(
+  shareReplay(1)
+);
 
 
   getRooms(){
