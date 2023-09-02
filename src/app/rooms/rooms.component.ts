@@ -5,6 +5,7 @@ import { Room } from './rooms';
 import { RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
+import { Observable } from 'rxjs';
 @Component({
  selector: 'hinv-rooms',
  templateUrl: './rooms.component.html',
@@ -22,6 +23,12 @@ constructor(@SkipSelf() private roomsService : RoomsService){
 
 }
 ngOnInit(): void {
+  this.stream.subscribe({
+    next:(data)=>{console.log(data);},
+    complete:()=>{console.log("Completed");},
+    error:(err)=>{console.log(err);}
+  });
+  this.stream.subscribe((data)=>{console.log(data);})
   this.roomsService.getRooms().subscribe((rooms)=>{
     console.log(rooms);
     this.roomList=rooms;
@@ -64,7 +71,13 @@ ngOnInit(): void {
    bookedRooms: 5
  }
  roomList: RoomList[] = []
- 
+ stream = new Observable(observer =>{
+   observer.next('user1');
+   observer.next('user2');
+   observer.next('user3');
+   observer.complete();
+   observer.error('Error Occured');
+ });
  toogle() {
    this.hideRooms = !this.hideRooms;
    this.title = "Rooms List";
