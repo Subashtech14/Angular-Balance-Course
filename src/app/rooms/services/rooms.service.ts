@@ -49,4 +49,14 @@ export class RoomsService {
     // return this.roomList;
      return this.http.get<RoomList[]>('api/Rooms/');
   }
+  addRoom(room:RoomList){
+    return this.http.post<RoomList[] >('api/Rooms/',room);
+  }
+  editRoom(room:RoomList){
+    return this.http.put<RoomList[] >(`api/Rooms/${room.roomNumber}`,room); 
+  }
+  delete(id:string){
+    return this.http.delete<RoomList[]>(`api/Rooms/${id}`);
+
+  }
 }

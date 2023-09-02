@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
  styleUrls: ['./rooms.component.scss']
 })
 export class RoomsComponent  implements OnInit,DoCheck,AfterViewInit,AfterViewChecked {
+
  title = 'Room List';
 // @ViewChild(HeaderComponent) headerComponent!  : HeaderComponent
  @ViewChild(HeaderComponent,{static:true}) headerComponent!  : HeaderComponent
@@ -22,6 +23,13 @@ export class RoomsComponent  implements OnInit,DoCheck,AfterViewInit,AfterViewCh
 constructor(@SkipSelf() private roomsService : RoomsService){
 
 }
+stream = new Observable<string>(observer =>{
+  observer.next('user1');
+  observer.next('user2');
+  observer.next('user3');
+  observer.complete();
+  observer.error('Error Occured');
+});
 ngOnInit(): void {
   this.stream.subscribe({
     next:(data)=>{console.log(data);},
@@ -71,13 +79,7 @@ ngOnInit(): void {
    bookedRooms: 5
  }
  roomList: RoomList[] = []
- stream = new Observable(observer =>{
-   observer.next('user1');
-   observer.next('user2');
-   observer.next('user3');
-   observer.complete();
-   observer.error('Error Occured');
- });
+
  toogle() {
    this.hideRooms = !this.hideRooms;
    this.title = "Rooms List";
@@ -94,6 +96,33 @@ ngOnInit(): void {
      rating:3
    }
    // this.roomList.push(room);
-   this.roomList=[...this.roomList,room];
+   //this.roomList=[...this.roomList,room];
+   this.roomsService.addRoom(room).subscribe((data)=>{
+     console.log(data);
+     this.roomList=data;
+     
+   })
  }
+ editRoom() {
+   const room: RoomList = {
+     roomNumber: "3",
+     roomType: 'Deluxe With Balcony',
+     amenities: 'TV, AC, Wifi',
+     price: 100,
+     photos: 'https://picsum.photos/200',
+     checkInTime: new Date('11/11/2000'),
+     checkOutTime: new Date('11/12/2002'),
+     rating:3
+  }
+  this.roomsService.editRoom(room).subscribe((data)=>{
+    console.log(data);
+    this.roomList=data;
+  })
+}
+deleteRoom(){
+  this.roomsService.delete('3').subscribe((data)=>{
+    console.log(data);
+  this.roomList=data;
+  })
+}
 }
