@@ -33,6 +33,7 @@ stream = new Observable<string>(observer =>{
 });
 totalBytes = 0;
 subscription!:Subscription;
+rooms$=this.roomsService.getRooms$;
 ngOnInit(): void {
   this.stream.subscribe({
     next:(data)=>{console.log(data);},
@@ -145,10 +146,10 @@ ngOnInit(): void {
   })
 }
 deleteRoom(){
-  this.subscription=this.roomsService.delete('3').subscribe((data)=>{
-    console.log(data);
-  this.roomList=data;
-  })
+  // this.roomsService.delete('3').subscribe((data)=>{
+  //   console.log(data);
+  // this.roomList=data;
+  // })
 }
 ngOnDestroy(){
   this.subscription.unsubscribe();

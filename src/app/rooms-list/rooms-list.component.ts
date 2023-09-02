@@ -11,7 +11,7 @@ import { Title } from '@angular/platform-browser';
 export class RoomsListComponent implements OnInit,OnChanges{
 
 //ngOnChanges is used for change detection and used only when input is used
-@Input() rooms:RoomList[]=[];
+@Input() rooms:RoomList[]|null=[] ;
 @Input() title:string='';
 @Output() selectedRoom=new EventEmitter<RoomList>();
 ngOnDestroy(): void {
