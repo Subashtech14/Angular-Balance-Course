@@ -6,6 +6,7 @@ import { RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
 import { Observable } from 'rxjs';
+import { HttpEventType } from '@angular/common/http';
 @Component({
  selector: 'hinv-rooms',
  templateUrl: './rooms.component.html',
@@ -30,6 +31,7 @@ stream = new Observable<string>(observer =>{
   observer.complete();
   observer.error('Error Occured');
 });
+totalBytes = 0;
 ngOnInit(): void {
   this.stream.subscribe({
     next:(data)=>{console.log(data);},
@@ -40,6 +42,29 @@ ngOnInit(): void {
   this.roomsService.getRooms().subscribe((rooms)=>{
     console.log(rooms);
     this.roomList=rooms;
+  })
+  this.roomsService.getPhotos().subscribe((event)=>{
+    switch(event.type){
+      case HttpEventType.Sent:{
+        console.log("Request sent...");
+        break;
+      }
+      case HttpEventType.ResponseHeader:{
+        console.log("Response header received..."); 
+        break;
+      }
+      case HttpEventType.DownloadProgress:{
+        console.log(this.totalBytes); 
+        this.totalBytes += event.loaded;
+        break;
+      }
+      case HttpEventType.Response:{
+        console.log("Response received... "+event.body);
+        break;
+      }
+    }
+
+    
   })
  //console.log(this.headerComponent);
  
@@ -72,7 +97,7 @@ ngOnInit(): void {
 
  hotelName = 'Hilton Hotel';
  numberofRooms = 10;
- hideRooms = false;
+ hideRooms = true;
  rooms: Room = {
    totalRooms: 20,
    availableRooms: 10,
@@ -91,8 +116,8 @@ ngOnInit(): void {
      amenities: 'TV, AC, Wifi',
      price: 100,
      photos: 'https://picsum.photos/200',
-     checkInTime: new Date('11/11/2000'),
-     checkOutTime: new Date('11/12/2002'),
+     checkinTime: new Date('11/11/2000'),
+     checkoutTime: new Date('11/12/2002'),
      rating:3
    }
    // this.roomList.push(room);
@@ -110,8 +135,8 @@ ngOnInit(): void {
      amenities: 'TV, AC, Wifi',
      price: 100,
      photos: 'https://picsum.photos/200',
-     checkInTime: new Date('11/11/2000'),
-     checkOutTime: new Date('11/12/2002'),
+     checkinTime: new Date('11/11/2000'),
+     checkoutTime: new Date('11/12/2002'),
      rating:3
   }
   this.roomsService.editRoom(room).subscribe((data)=>{
