@@ -5,7 +5,7 @@ import { Room } from './rooms';
 import { RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
-import { Observable, Subject, Subscription, catchError } from 'rxjs';
+import { Observable, Subject, Subscription, catchError, map } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 @Component({
  selector: 'hinv-rooms',
@@ -43,8 +43,12 @@ rooms$=this.roomsService.getRooms$.pipe(
     return [];
   })
 );
+roomsCount$=this.roomsService.getRooms$.pipe(
+  map((rooms)=>rooms.length
+))
 
 ngOnInit(): void {
+  console.log("Rooms Count "+this.roomsCount$);
   this.stream.subscribe({
     next:(data)=>{console.log(data);},
     complete:()=>{console.log("Completed");},
