@@ -5,7 +5,7 @@ import { Room } from './rooms';
 import { RoomList } from './rooms';
 import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, catchError } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 @Component({
  selector: 'hinv-rooms',
@@ -33,7 +33,17 @@ stream = new Observable<string>(observer =>{
 });
 totalBytes = 0;
 subscription!:Subscription;
-rooms$=this.roomsService.getRooms$;
+//rooms$=this.roomsService.getRooms$;
+error$:Subject<string>=new Subject<string>();
+getError$=this.error$.asObservable();
+rooms$=this.roomsService.getRooms$.pipe(
+  catchError((err)=>{
+    //console.log(err);
+    this.error$.next(err.message);
+    return [];
+  })
+);
+
 ngOnInit(): void {
   this.stream.subscribe({
     next:(data)=>{console.log(data);},
