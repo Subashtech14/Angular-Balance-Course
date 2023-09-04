@@ -11,6 +11,7 @@ import { EmployeeComponent } from './employee/employee.component';
 import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appconfig.services';
 import { RequestInterceptor } from './request.interceptor';
 import { InitService } from './init.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 function initFactory(initService: InitService) {
   return () => initService.init();
 }
@@ -27,6 +28,7 @@ function initFactory(initService: InitService) {
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     {
