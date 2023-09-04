@@ -12,6 +12,14 @@ import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appconfig.services';
 import { RequestInterceptor } from './request.interceptor';
 import { InitService } from './init.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppNavComponent } from './app-nav/app-nav.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { RoomsBookingComponent } from './rooms/rooms-booking/rooms-booking.component';
 function initFactory(initService: InitService) {
   return () => initService.init();
 }
@@ -23,12 +31,20 @@ function initFactory(initService: InitService) {
     HeaderComponent,
     ContainerComponent,
     EmployeeComponent,
+    AppNavComponent,
+    NotfoundComponent,
+    RoomsBookingComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
   ],
   providers: [
     {

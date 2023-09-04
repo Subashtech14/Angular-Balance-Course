@@ -14,10 +14,15 @@ export class RoomsListComponent implements OnInit,OnChanges{
 @Input() rooms:RoomList[]|null=[] ;
 @Input() title:string='';
 @Output() selectedRoom=new EventEmitter<RoomList>();
-ngOnDestroy(): void {
-  console.log('Destroyed');
+roomS(){
+  console.log("Rooms Selected");
   
 }
+
+// ngOnDestroy(): void {
+//   console.log('Destroyed');
+  
+// }
 ngOnChanges(changes: SimpleChanges): void {
   console.log("Changes Occured:", changes['rooms'].currentValue);
   if(changes['title']){
