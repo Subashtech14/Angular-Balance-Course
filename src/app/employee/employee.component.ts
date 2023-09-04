@@ -11,11 +11,11 @@ import { RoomsService } from '../rooms/services/rooms.service';
 })
 
 export class EmployeeComponent {
-empName:string = 'John';
-// constructor(@Self() private roomsService:RoomsService){
+  empName: string = 'John';
+  // constructor(@Self() private roomsService:RoomsService){
 
-// }
-constructor( private roomsService:RoomsService){
+  // }
+  constructor(private roomsService: RoomsService) {
 
-}
+  }
 }

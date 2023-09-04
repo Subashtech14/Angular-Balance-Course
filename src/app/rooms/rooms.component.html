@@ -3,8 +3,8 @@
 <h1>Number of Rooms is : {{roomsCount$ | async}}</h1>
 <!-- {{rooms$|async | json}} -->
 <div [hidden]="hideRooms">
-Number of Rooms:
-<p [innerText]="numberofRooms"></p>
+  Number of Rooms:
+  <p [innerText]="numberofRooms"></p>
 </div>
 <p [ngStyle]="rooms.availableRooms > 0 ? {'color': 'green'} : {'color': 'red'}">Welcome to Hotel Booking App</p>
 <!-- Optional Chaning and Nullish Collision -->
@@ -14,12 +14,10 @@ Number of Rooms:
   {{selectedRoom|json}}
 </div>
 <button (click)="addRoom()">
-Add Room  
+  Add Room
 </button>
 <div *ngIf="rooms$|async as rooms ">
-  <hinv-rooms-list [rooms]="rooms " [title]="title"
-  (selectedRoom)="selectRoom($event)"
-  ></hinv-rooms-list>
+  <hinv-rooms-list [rooms]="rooms " [title]="title" (selectedRoom)="selectRoom($event)"></hinv-rooms-list>
 </div>
 <br>
 <button (click)="toogle()">Toggle</button>
