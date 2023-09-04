@@ -13,9 +13,7 @@
 <div *ngIf="selectedRoom">
   {{selectedRoom|json}}
 </div>
-<button (click)="addRoom()">
-  Add Room
-</button>
+
 <div *ngIf="rooms$|async as rooms ">
   <hinv-rooms-list [rooms]="rooms " [title]="title" (selectedRoom)="selectRoom($event)"></hinv-rooms-list>
 </div>
