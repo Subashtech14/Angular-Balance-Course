@@ -1,1 +1,12 @@
-<p>login works!</p>
+<div class="login-container">
+    <form>
+        <label for="email">Email</label><br>
+        <input #emailControl="ngModel" hinvEmailvalidaotr hinvHover="green" color="steelBlue" type="email" name="email" placeholder="Email" [(ngModel)]="email" required><br>
+        <div>
+            {{emailControl.errors | json}}
+        </div>
+        <label for="Password">Password</label><br>
+        <input  hinvHover="green" color="steelBlue" type="password" name="password" [(ngModel)]="password" placeholder="Password" required><br>
+        <button type="submit" (click)="Login()">Login</button>
+    </form>
+</div>
