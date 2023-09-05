@@ -2,7 +2,7 @@ import { Directive } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validators } from '@angular/forms';
 
 @Directive({
-  selector: '[hinvEmailvalidaotr]',
+  selector: '[hinvEmailvalidtor]',
   providers: [
     {
       provide:NG_VALIDATORS,
@@ -17,7 +17,7 @@ export class EmailvalidaotrDirective implements Validators{
   constructor() { }
   validate(control:AbstractControl): ValidationErrors | null{
     const value= control.value as string;
-    if(value.includes('test')){
+    if(value.includes('admin')){
       return {
         invalidEmail:true
       }

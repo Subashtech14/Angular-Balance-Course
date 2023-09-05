@@ -7,8 +7,6 @@ import { RoomsBookingComponent } from './rooms-booking/rooms-booking.component';
 import { RoomsAddComponent } from './rooms-add/rooms-add.component';
 import { FormsModule } from '@angular/forms';
 import { HeaderModule } from '../header/header.module';
-
-
 @NgModule({
   declarations: [
     RoomsComponent,
