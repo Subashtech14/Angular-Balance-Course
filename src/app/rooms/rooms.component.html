@@ -2,6 +2,7 @@
 <hinv-header></hinv-header>
 <h1>Number of Rooms is : {{roomsCount$ | async}}</h1>
 <!-- {{rooms$|async | json}} -->
+<button routerLink="add">Add Room</button>
 <div [hidden]="hideRooms">
   Number of Rooms:
   <p [innerText]="numberofRooms"></p>
