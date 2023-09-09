@@ -3,7 +3,7 @@ import { RouteConfig } from 'src/app/services/routeConfig';
 import { RouteConfigToken } from 'src/app/services/routerConfig.service';
 
 @Injectable({
-  providedIn: 'any',
+  providedIn: 'root',
 })
 export class ConfigService {
   constructor(@Inject(RouteConfigToken) private configToken:RouteConfig) {
