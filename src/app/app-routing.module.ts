@@ -20,6 +20,7 @@ const routes: Routes = [
     loadChildren: () =>
     import('./booking/booking.module').then((m) => m.BookingModule),
     canActivate: [LoginGuard],
+    canLoad:[LoginGuard]
   },
   { path: '**', component: NotfoundComponent },
 ];
