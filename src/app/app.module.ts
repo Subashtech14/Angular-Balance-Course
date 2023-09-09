@@ -22,6 +22,7 @@ import { HoverDirective } from './hover.directive';
 import { EmailvalidaotrDirective } from './emailvalidator/emailvalidaotr.directive';
 //import { RoomsModule } from './rooms/rooms.module';
 import { HeaderModule } from './header/header.module';
+import { RouteConfigToken } from './services/routerConfig.service';
 function initFactory(initService: InitService) {
   return () => initService.init();
 }
@@ -53,18 +54,26 @@ function initFactory(initService: InitService) {
   providers: [
     {
       provide: APP_SERVICE_CONFIG,
-      useValue: APP_CONFIG
-    }, {
+      useValue: APP_CONFIG,
+    },
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: RequestInterceptor,
-      multi: true
-    }, {
+      multi: true,
+    },
+    {
       provide: APP_INITIALIZER,
       useFactory: initFactory,
       deps: [InitService],
-      multi: true
-    }
+      multi: true,
+    },
+    {
+      provide: RouteConfigToken,
+      useValue: {
+        title: 'Home',
+      },
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

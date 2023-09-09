@@ -1,23 +1,34 @@
-
-import { AfterViewInit, Component, ElementRef, Inject, OnInit, Optional, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Inject,
+  OnInit,
+  Optional,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import { RoomsComponent } from './rooms/rooms.component';
 import { LoggerService } from './logger.service';
 import { localStorageToken } from './localstorage.token';
 import { InitService } from './init.service';
+import { ConfigService } from './rooms/services/config.service';
 @Component({
   selector: 'hinv-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
   // template: `<h1>Hello World from inline template</h1>`,
   // styles:["h1{color:red}"]
 })
 export class AppComponent implements OnInit {
-
-  constructor(@Optional() private loggerService: LoggerService,
+  constructor(
+    @Optional() private loggerService: LoggerService,
     @Inject(localStorageToken) private localStorage: Storage,
-    private initService: InitService) {
+    private initService: InitService,
+    private configService: ConfigService
+  ) {
     console.log(initService.config);
-
+    console.log('Config Service Initialized...');
   }
   ngOnInit(): void {
     this.loggerService?.log('AppComponent.ngOnInit()');
@@ -32,5 +43,4 @@ export class AppComponent implements OnInit {
   //  const componentRef = this.vcr.createComponent(RoomsComponent);
   //  componentRef.instance.numberofRooms=50;
   // }
-
 }

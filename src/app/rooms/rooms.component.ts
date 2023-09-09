@@ -7,6 +7,7 @@ import { HeaderComponent } from '../header/header.component';
 import { RoomsService } from './services/rooms.service';
 import { Observable, Subject, Subscription, catchError, map } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
+import { ConfigService } from './services/config.service';
 @Component({
  selector: 'hinv-rooms',
  templateUrl: './rooms.component.html',
@@ -21,7 +22,9 @@ export class RoomsComponent  implements OnInit,DoCheck,AfterViewInit,AfterViewCh
 //view child for the first one instance view Children for more than one instance
 //first executed
 // roomService = new RoomsService();
-constructor(@SkipSelf() private roomsService : RoomsService){
+constructor(@SkipSelf() private roomsService : RoomsService, private configService:ConfigService) {
+  console.log('Config Service Initialized...');
+  
 
 }
 stream = new Observable<string>(observer =>{
